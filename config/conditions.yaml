@@ -1,0 +1,78 @@
+# Benchmark conditions — each defines how the agent reaches AWS.
+
+conditions:
+  cli:
+    name: "aws CLI (raw)"
+    tool: aws
+    agents_md: |
+      # Tools
+
+      You have the `aws` CLI installed and configured. Use it for all AWS
+      operations. Run `aws <service> <operation> help` to discover flags.
+
+      Examples:
+      - `aws s3api list-buckets`
+      - `aws ec2 describe-instances`
+      - `aws lambda list-functions`
+
+      Credentials are already in the environment. Do not attempt to configure
+      profiles or assume roles.
+
+  axi:
+    name: "aws-axi (AXI wrapper)"
+    tool: aws-axi
+    setup_commands:
+      - "aws-axi --version"
+    agents_md: |
+      # Tools
+
+      You have `aws-axi` installed for AWS operations. The `aws` CLI is not
+      available to you — use `aws-axi` for everything. It accepts the same
+      service and operation names as the AWS CLI but returns compact,
+      token-efficient output with pre-computed summaries and next-step hints.
+
+      Examples:
+      - `aws-axi s3 ls`
+      - `aws-axi ec2 describe-instances`
+      - `aws-axi lambda list-functions`
+      - `aws-axi logs describe-log-groups --prefix /aws/lambda`
+
+      Run `aws-axi --help` for the command surface. Credentials are already in
+      the environment.
+
+  mcp-with-toolsearch:
+    name: "AWS MCP server (with ToolSearch)"
+    tool: mcp
+    mcp:
+      command: uvx
+      args:
+        - "mcp-proxy-for-aws@latest"
+        - "https://aws-mcp.us-east-1.api.aws/mcp"
+    agents_md: |
+      # Tools
+
+      You have the AWS MCP server registered. Use its tools for all AWS
+      operations — they cover the full AWS API surface plus AWS documentation
+      search.
+
+      IMPORTANT: Do NOT use the `aws` CLI, `curl`, or any shell command to reach
+      AWS. Use the MCP tools exclusively.
+
+  mcp-no-toolsearch:
+    name: "AWS MCP server (no ToolSearch)"
+    tool: mcp
+    disable_tool_search: true
+    mcp:
+      command: uvx
+      args:
+        - "mcp-proxy-for-aws@latest"
+        - "https://aws-mcp.us-east-1.api.aws/mcp"
+    agents_md: |
+      # Tools
+
+      You have the AWS MCP server registered. Use its tools for all AWS
+      operations — they cover the full AWS API surface plus AWS documentation
+      search.
+
+      IMPORTANT: Do NOT use the `aws` CLI, `curl`, or any shell command to reach
+      AWS. Use the MCP tools exclusively.
