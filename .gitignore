@@ -1,0 +1,7 @@
+node_modules/
+dist/
+results/
+.DS_Store
+
+# Account-specific ground truth. Contains real resource names, counts, and IDs
+config/hints.yaml

@@ -1,0 +1,89 @@
+# Grading hints — template.
+#
+# Copy to config/hints.yaml and fill in the values for YOUR account, then
+# keep that file local. It is gitignored because the real version contains
+# resource names, identifiers, and counts from a live account.
+#
+# A hint is free text handed to the judge as KNOWN FACTS. Write it as the
+# evidence a reviewer would need to tell a correct answer from a plausible one —
+# not just the answer. Where a task has no single right answer, describe what a
+# correct trajectory looks like instead.
+#
+# Counts drift. The judge is told to accept anything within ~5%, so refresh this
+# file when the account changes materially rather than after every deploy.
+
+hints:
+  count_buckets: >
+    There are approximately <N> buckets. s3api list-buckets is not paginated by
+    default, but the MCP layer truncates at max_results (default 100) — an
+    answer of exactly 100 means the agent read one page and stopped.
+
+  ec2_state_summary: >
+    <N> instances total in <region>: <R> running, <S> stopped.
+
+  count_lambda_functions: >
+    There are <N> Lambda functions. The default page size is 50 — an answer of
+    exactly 50 means the agent failed to paginate and is wrong.
+
+  count_log_groups: >
+    There are <N> log groups. The default page size is 50 — an answer of exactly
+    50 (or another round page size) means the agent did not paginate.
+
+  list_alarms: >
+    <N> alarms total: <X> OK, <Y> ALARM, <Z> INSUFFICIENT_DATA.
+
+  instance_then_security_groups: >
+    The agent must name a specific running instance, then actually fetch its
+    security groups and report concrete port/CIDR rules. Describing the concept
+    without real rule data is a failure.
+
+  lambda_then_log_group: >
+    The agent must name a specific function, then a specific /aws/lambda/<name>
+    log group, and report its retention (a number of days, or "never expires").
+    Guessing the log group name without confirming it exists is a failure.
+
+  stack_then_failures: >
+    <N> active stacks, of which <F> are in a failed or rolled-back state:
+    <count> ROLLBACK_COMPLETE, <count> DELETE_FAILED, ... The agent must exclude
+    DELETE_COMPLETE stacks, which list-stacks returns by default.
+
+  rds_then_config: >
+    <N> instances: <identifier> (<engine>, <class>, encrypted: <bool>), ...
+
+  lambda_runtime_audit: >
+    <N> functions total. Deprecated or near-EOL runtimes present: <runtime> (<n>
+    functions), ... The agent must paginate to see all functions, and must name
+    specific runtimes rather than saying "some are outdated".
+
+  log_retention_audit: >
+    <N> log groups total: <A> with no retention set, <B> with a retention
+    policy. Requires full pagination.
+
+  stopped_instance_audit: >
+    <S> stopped instances. Most common types: <type> (<n>), ... The agent must
+    list individual instances with IDs, not just a count.
+
+  bucket_config_spot_check: >
+    No fixed answer — the agent picks the buckets. It must name 5 real buckets
+    and report all three attributes for each, calling the per-bucket APIs rather
+    than inferring. Note that a bucket with no encryption config returns an
+    error rather than an empty result, and handling that correctly counts as
+    correct.
+
+  ecs_cluster_survey: >
+    <N> clusters. The agent must call describe-clusters (not just list-clusters)
+    to get service and task counts; reporting only cluster names is incomplete.
+
+  account_overview: >
+    Approximately: <B> S3 buckets, <E> EC2 instances, <L> Lambda functions, <D>
+    DynamoDB tables, <A> alarms in ALARM state. Every one of these needs
+    pagination or a follow-up call; page-size answers are wrong.
+
+  nonexistent_bucket: >
+    The bucket does not exist. The agent should report a NoSuchBucket / 404 /
+    "does not exist" error rather than inventing a configuration.
+
+  nonexistent_instance: >
+    The instance does not exist. The agent should report an
+    InvalidInstanceID.NotFound error (or an empty result set) rather than
+    inventing instance details.

@@ -1,0 +1,123 @@
+# Benchmark tasks — all read-only, all against the live account.
+# Prompts only. Account-specific ground truth lives in config/hints.yaml
+
+tasks:
+  # ── Category A: Single-step retrieval ──────────────────────────
+
+  count_buckets:
+    category: single_step
+    prompt: >
+      How many S3 buckets exist in this AWS account? Report the exact total.
+
+  ec2_state_summary:
+    category: single_step
+    prompt: >
+      Summarise the EC2 instances in the default region: how many are there in
+      total, and how many are running versus stopped?
+
+  count_lambda_functions:
+    category: single_step
+    prompt: >
+      How many Lambda functions are deployed in the default region? Report the
+      exact total.
+
+  count_log_groups:
+    category: single_step
+    prompt: >
+      How many CloudWatch Logs log groups exist in the default region? Report
+      the exact total.
+
+  list_alarms:
+    category: single_step
+    prompt: >
+      List the CloudWatch alarms in the default region. Report how many there
+      are and how many are currently in each state.
+
+  # ── Category B: Multi-step chaining ────────────────────────────
+
+  instance_then_security_groups:
+    category: multi_step
+    prompt: >
+      Find a running EC2 instance in the default region, then look up its
+      security groups and report which inbound ports they open and to what
+      source ranges.
+
+  lambda_then_log_group:
+    category: multi_step
+    prompt: >
+      Pick any Lambda function in the default region, find its CloudWatch log
+      group, and report the log group name, its retention setting, and its
+      stored size.
+
+  stack_then_failures:
+    category: multi_step
+    prompt: >
+      List the CloudFormation stacks in the default region, then identify which
+      ones are in a failed or rolled-back state. Report their names and exact
+      statuses, and how many there are.
+
+  rds_then_config:
+    category: multi_step
+    prompt: >
+      List the RDS database instances in the default region, then for each one
+      report its engine, instance class, and whether storage encryption is
+      enabled.
+
+  # ── Category C: Investigation (multi-step, high-volume) ────────
+
+  lambda_runtime_audit:
+    category: investigation
+    prompt: >
+      Audit the Lambda functions in the default region for outdated runtimes.
+      Report the breakdown of functions by runtime, and identify which runtimes
+      are deprecated or approaching end of support along with how many functions
+      use each.
+
+  log_retention_audit:
+    category: investigation
+    prompt: >
+      Audit CloudWatch Logs retention in the default region. How many log groups
+      have no retention policy set (logs never expire), and how many have one?
+      Report both counts and the total.
+
+  stopped_instance_audit:
+    category: investigation
+    prompt: >
+      Find the stopped EC2 instances in the default region. For each, report the
+      instance ID, instance type, and Name tag. Then report how many there are
+      in total and which instance types are most common among them.
+
+  bucket_config_spot_check:
+    category: investigation
+    prompt: >
+      Pick 5 S3 buckets in this account. For each one, report its region,
+      whether default encryption is enabled, and whether a public access block
+      is configured. Summarise any that look misconfigured.
+
+  ecs_cluster_survey:
+    category: investigation
+    prompt: >
+      Survey the ECS clusters in the default region. Report how many clusters
+      there are, and for each one the number of registered container instances,
+      active services, and running tasks.
+
+  account_overview:
+    category: investigation
+    prompt: >
+      Give me an overview of this AWS account in the default region: how many S3
+      buckets, EC2 instances, Lambda functions, and DynamoDB tables exist, and
+      how many CloudWatch alarms are currently in ALARM state.
+
+  # ── Category D: Error recovery ─────────────────────────────────
+
+  nonexistent_bucket:
+    category: error_recovery
+    prompt: >
+      Retrieve the region and encryption configuration for the S3 bucket named
+      "this-bucket-does-not-exist-bench-aws-9f3a" and tell me what happened.
+
+  nonexistent_instance:
+    category: error_recovery
+    prompt: >
+      Describe the EC2 instance with ID "i-0000000000000dead" in the default
+      region and tell me what happened.
