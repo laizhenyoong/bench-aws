@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="240" viewBox="0 0 880 240" role="img" aria-label="Duration and cost per task by condition, lower is better. axi is lowest on both.">
+  <rect width="880" height="240" fill="#1a1a19"/>
+  <text x="168" y="66" text-anchor="end" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-weight="600" fill="#ffffff">axi</text>
+  <text x="168" y="112" text-anchor="end" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-weight="400" fill="#c3c2b7">cli</text>
+  <text x="168" y="158" text-anchor="end" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-weight="400" fill="#c3c2b7">mcp-no-toolsearch</text>
+  <text x="168" y="204" text-anchor="end" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-weight="400" fill="#c3c2b7">mcp-with-toolsearch</text>
+  <text x="182" y="20" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="12" font-weight="600" letter-spacing="0.06em" fill="#898781">DURATION</text>
+  <path d="M182,52 H249.35426725716758 A4,4 0 0 1 253.35426725716758,56 V66 A4,4 0 0 1 249.35426725716758,70 H182 Z" fill="#3987e5"/>
+  <text x="263.3542672571676" y="65" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">17.9s</text>
+  <path d="M182,98 H295.73833705171324 A4,4 0 0 1 299.73833705171324,102 V112 A4,4 0 0 1 295.73833705171324,116 H182 Z" fill="#898781"/>
+  <text x="309.73833705171324" y="111" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">29.5s</text>
+  <path d="M182,144 H310.491092537711 A4,4 0 0 1 314.491092537711,148 V158 A4,4 0 0 1 310.491092537711,162 H182 Z" fill="#898781"/>
+  <text x="324.491092537711" y="157" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">33.2s</text>
+  <path d="M182,190 H418 A4,4 0 0 1 422,194 V204 A4,4 0 0 1 418,208 H182 Z" fill="#898781"/>
+  <text x="432" y="203" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">60.1s</text>
+  <text x="560" y="20" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="12" font-weight="600" letter-spacing="0.06em" fill="#898781">COST</text>
+  <path d="M560,52 H585.6668833096794 A4,4 0 0 1 589.6668833096794,56 V66 A4,4 0 0 1 585.6668833096794,70 H560 Z" fill="#3987e5"/>
+  <text x="599.6668833096794" y="65" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">$0.073</text>
+  <path d="M560,98 H591.8099676872015 A4,4 0 0 1 595.8099676872015,102 V112 A4,4 0 0 1 591.8099676872015,116 H560 Z" fill="#898781"/>
+  <text x="605.8099676872015" y="111" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">$0.088</text>
+  <path d="M560,144 H796 A4,4 0 0 1 800,148 V158 A4,4 0 0 1 796,162 H560 Z" fill="#898781"/>
+  <text x="810" y="157" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">$0.588</text>
+  <path d="M560,190 H672.3894962488789 A4,4 0 0 1 676.3894962488789,194 V204 A4,4 0 0 1 672.3894962488789,208 H560 Z" fill="#898781"/>
+  <text x="686.3894962488789" y="203" font-family="system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif" font-size="13" font-variant-numeric="tabular-nums" fill="#c3c2b7">$0.285</text>
+</svg>
