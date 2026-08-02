@@ -13,6 +13,26 @@ and the hosted [AWS MCP server](https://github.com/awslabs/mcp).
 | `mcp-with-toolsearch`   | AWS MCP server  | Tools are found via ToolSearch, then called.                             |
 | `mcp-no-toolsearch`     | AWS MCP server  | All tool schemas load upfront; ToolSearch is disabled.                   |
 
+## Getting Started
+
+Install dependencies and set up your account hints:
+
+```bash
+npm install
+cp config/hints.example.yaml config/hints.local.yaml
+```
+
+Available commands:
+
+```bash
+npm run bench -- preflight   # check tooling, credentials, and hints
+npm run bench -- run --condition cli --task count_lambda_functions --repeat 3   # run one task
+npm run bench -- matrix --repeat 3   # run every condition against every task
+```
+
+Each run mints a short-lived, read-only AWS session using your current
+credentials.
+
 ## Benchmark Results
 
 One of the tests we ran was `count_lambda_functions`:
